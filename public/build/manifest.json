@@ -1,6 +1,6 @@
 {
-  "_BarChart-XGmkHWw5.js": {
-    "file": "assets/BarChart-XGmkHWw5.js",
+  "_BarChart-iGE4mGMr.js": {
+    "file": "assets/BarChart-iGE4mGMr.js",
     "name": "BarChart",
     "imports": [
       "_jsx-runtime-Wy9s6hX0.js",
@@ -15,12 +15,12 @@
       "_ui-lGgZXmT5.js"
     ]
   },
-  "_LineChart-Bz7sLszD.js": {
-    "file": "assets/LineChart-Bz7sLszD.js",
+  "_LineChart-qnIt3XMv.js": {
+    "file": "assets/LineChart-qnIt3XMv.js",
     "name": "LineChart",
     "imports": [
       "_jsx-runtime-Wy9s6hX0.js",
-      "_BarChart-XGmkHWw5.js"
+      "_BarChart-iGE4mGMr.js"
     ]
   },
   "_jsx-runtime-Wy9s6hX0.js": {
@@ -75,7 +75,7 @@
     "src": "node_modules/leaflet/dist/images/marker-icon.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-C3ZkLTmi.css",
+    "file": "assets/app-HOMVA_H7.css",
     "name": "app",
     "names": [
       "app.css"
@@ -84,7 +84,7 @@
     "isEntry": true
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-CZj79ucb.js",
+    "file": "assets/app-Cbn90CKR.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
@@ -106,7 +106,7 @@
       "resources/js/pages/ExerciseProgress.tsx"
     ],
     "css": [
-      "assets/app-C3ZkLTmi.css"
+      "assets/app-HOMVA_H7.css"
     ]
   },
   "resources/js/components/MapView.tsx": {
@@ -127,7 +127,7 @@
     ]
   },
   "resources/js/pages/Energy.tsx": {
-    "file": "assets/Energy-BjzOZQ9v.js",
+    "file": "assets/Energy-wcRP5JYr.js",
     "name": "Energy",
     "src": "resources/js/pages/Energy.tsx",
     "isDynamicEntry": true,
@@ -135,18 +135,18 @@
       "_jsx-runtime-Wy9s6hX0.js",
       "_ui-lGgZXmT5.js",
       "resources/js/app.tsx",
-      "_BarChart-XGmkHWw5.js"
+      "_BarChart-iGE4mGMr.js"
     ]
   },
   "resources/js/pages/EnergyHistory.tsx": {
-    "file": "assets/EnergyHistory-DLzO3-94.js",
+    "file": "assets/EnergyHistory-BsJYjMwg.js",
     "name": "EnergyHistory",
     "src": "resources/js/pages/EnergyHistory.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_jsx-runtime-Wy9s6hX0.js",
       "_ui-lGgZXmT5.js",
-      "_BarChart-XGmkHWw5.js"
+      "_BarChart-iGE4mGMr.js"
     ]
   },
   "resources/js/pages/ExerciseDetail.tsx": {
@@ -174,7 +174,7 @@
     ]
   },
   "resources/js/pages/ExerciseProgress.tsx": {
-    "file": "assets/ExerciseProgress-CYNmTx6T.js",
+    "file": "assets/ExerciseProgress-A9vFEo7u.js",
     "name": "ExerciseProgress",
     "src": "resources/js/pages/ExerciseProgress.tsx",
     "isDynamicEntry": true,
@@ -182,8 +182,8 @@
       "_jsx-runtime-Wy9s6hX0.js",
       "_ui-lGgZXmT5.js",
       "resources/js/app.tsx",
-      "_BarChart-XGmkHWw5.js",
-      "_LineChart-Bz7sLszD.js"
+      "_BarChart-iGE4mGMr.js",
+      "_LineChart-qnIt3XMv.js"
     ]
   },
   "resources/js/pages/ExercisesHome.tsx": {
@@ -199,7 +199,7 @@
     ]
   },
   "resources/js/pages/MapPage.tsx": {
-    "file": "assets/MapPage-D4IDxGcs.js",
+    "file": "assets/MapPage-CYx9iNIo.js",
     "name": "MapPage",
     "src": "resources/js/pages/MapPage.tsx",
     "isDynamicEntry": true,
@@ -215,7 +215,7 @@
     ]
   },
   "resources/js/pages/Programs.tsx": {
-    "file": "assets/Programs-CjZZIoUF.js",
+    "file": "assets/Programs-L4jPaWQK.js",
     "name": "Programs",
     "src": "resources/js/pages/Programs.tsx",
     "isDynamicEntry": true,
@@ -229,7 +229,7 @@
     ]
   },
   "resources/js/pages/SessionRunner.tsx": {
-    "file": "assets/SessionRunner-C7HplXcT.js",
+    "file": "assets/SessionRunner-BnWeE7q2.js",
     "name": "SessionRunner",
     "src": "resources/js/pages/SessionRunner.tsx",
     "isDynamicEntry": true,
@@ -245,7 +245,7 @@
     ]
   },
   "resources/js/pages/TracksHistory.tsx": {
-    "file": "assets/TracksHistory-DNJvryub.js",
+    "file": "assets/TracksHistory-Bkq-Z87x.js",
     "name": "TracksHistory",
     "src": "resources/js/pages/TracksHistory.tsx",
     "isDynamicEntry": true,
@@ -259,15 +259,15 @@
     ]
   },
   "resources/js/pages/Trends.tsx": {
-    "file": "assets/Trends-CmTspd6F.js",
+    "file": "assets/Trends-B5j6k8C8.js",
     "name": "Trends",
     "src": "resources/js/pages/Trends.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_jsx-runtime-Wy9s6hX0.js",
       "_ui-lGgZXmT5.js",
-      "_BarChart-XGmkHWw5.js",
-      "_LineChart-Bz7sLszD.js"
+      "_BarChart-iGE4mGMr.js",
+      "_LineChart-qnIt3XMv.js"
     ]
   }
 }

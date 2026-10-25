@@ -1,6 +1,7 @@
-@import 'tailwindcss';
+@import 'tailwindcss' source(none); /* only scan what really contains classes: reproducible builds, not influenced by docs/.env/vendor */
 
 @source '../js';
+@source '../views';
 
 @theme {
     --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;

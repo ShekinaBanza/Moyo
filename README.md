@@ -21,7 +21,7 @@ Prérequis : PHP ≥ 8.2 (extensions `mbstring`, `openssl`, `pdo_mysql` ou `pdo_
 
 ```bash
 composer install
-cp .env.example .env
+cp .env.local.example .env   # (.env.example = modèle de PRODUCTION Hostinger)
 php artisan key:generate
 # Éditez .env : DB_* (MySQL XAMPP) ou DB_CONNECTION=sqlite avec database/database.sqlite
 php artisan migrate --seed

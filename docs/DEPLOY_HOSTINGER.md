@@ -134,6 +134,16 @@ Un paquet prêt à envoyer est généré localement : `deploy/moyo-hostinger-upl
 4. Créer `moyo/.env` (modèle ci-dessous) via le Gestionnaire de fichiers.
 
 ### C. `.env` de production (à créer sur le serveur, jamais dans Git)
+Le modèle complet et commenté est **`.env.example`** du dépôt (déjà réglé pour la production : `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL`, français, MySQL, sessions/cache en base, file d'attente `sync`, cookies sécurisés, domaine Sanctum). Sur le serveur : copiez-le en `.env`, puis renseignez **uniquement** ces valeurs, lues dans hPanel :
+
+| Variable | Où la trouver |
+|---|---|
+| `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` | hPanel → Bases de données → Gestion (créer la base et l'utilisateur ; `DB_HOST=localhost` sauf indication contraire affichée) |
+| `APP_KEY` | générée par `php artisan key:generate --force` (une seule fois) |
+| `MAIL_*` (facultatif) | hPanel → E-mails (sinon aucun e-mail n'est envoyé) |
+| `VAPID_*` (facultatif) | `php artisan webpush:vapid` |
+
+Le fichier `.env` doit rester **hors de la racine web** (dans le dossier du projet, pas dans `public/` ni `public_html/`) ; vérifiez que `https://…/.env` répond 403/404. Ci-dessous, un exemple équivalent :
 ```
 APP_NAME="Moyo"
 APP_ENV=production
