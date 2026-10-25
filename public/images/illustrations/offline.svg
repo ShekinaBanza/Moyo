@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img" aria-labelledby="t"><title id="t">Réseau indisponible : mode hors ligne</title>
+<ellipse cx="120" cy="160" rx="80" ry="10" fill="#334155" opacity=".1"/>
+<g fill="none" stroke="#64748b" stroke-width="9" stroke-linecap="round"><path d="M44 78 q76 -62 152 0"/><path d="M68 104 q52 -40 104 0"/><path d="M94 130 q26 -20 52 0"/></g>
+<circle cx="120" cy="146" r="8" fill="#64748b"/>
+<path d="M52 36 L188 150" stroke="#f97316" stroke-width="9" stroke-linecap="round"/>
+</svg>

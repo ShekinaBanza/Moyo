@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="t"><title id="t">Lune, étoiles et lit pour représenter le sommeil</title>
+<rect width="480" height="300" rx="32" fill="#1e3a5f"/>
+<circle cx="360" cy="80" r="46" fill="#fef3c7"/><circle cx="378" cy="68" r="40" fill="#1e3a5f"/>
+<g fill="#fef3c7"><circle cx="70" cy="60" r="3"/><circle cx="150" cy="100" r="2.5"/><circle cx="230" cy="48" r="3"/><circle cx="290" cy="120" r="2"/><circle cx="110" cy="150" r="2"/><circle cx="430" cy="160" r="2.5"/></g>
+<rect x="60" y="190" width="360" height="26" rx="8" fill="#b45309"/><rect x="60" y="150" width="30" height="100" rx="8" fill="#92400e"/><rect x="390" y="170" width="30" height="80" rx="8" fill="#92400e"/>
+<rect x="84" y="162" width="300" height="40" rx="14" fill="#e0f2fe"/><rect x="84" y="170" width="300" height="32" rx="14" fill="#0f766e"/>
+<ellipse cx="124" cy="160" rx="38" ry="18" fill="#fff"/>
+<text x="250" y="130" fill="#99f6e4" font-family="system-ui,sans-serif" font-size="30" font-weight="700">z z z</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img" aria-labelledby="t"><title id="t">Carnet vide avec un crayon : rien d'enregistré pour le moment</title>
+<ellipse cx="120" cy="160" rx="84" ry="10" fill="#0f766e" opacity=".12"/>
+<rect x="56" y="24" width="112" height="132" rx="14" fill="#fff" stroke="#99d9cb" stroke-width="4"/>
+<rect x="56" y="24" width="20" height="132" rx="10" fill="#0f766e"/>
+<g stroke="#d1e8e2" stroke-width="6" stroke-linecap="round"><path d="M94 58 h54"/><path d="M94 82 h40"/><path d="M94 106 h48"/></g>
+<g transform="rotate(35 176 110)"><rect x="168" y="62" width="16" height="74" rx="4" fill="#f59e0b"/><path d="M168 136 l8 18 l8 -18z" fill="#fde68a"/><rect x="168" y="62" width="16" height="12" rx="4" fill="#f97316"/></g>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 400" role="img" aria-labelledby="t"><title id="t">Une personne marche au lever du soleil, entourée de feuilles</title>
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fde8c8"/><stop offset="1" stop-color="#d7f5ee"/></linearGradient></defs>
+<rect width="480" height="400" rx="36" fill="url(#sky)"/>
+<circle cx="350" cy="120" r="62" fill="#fbbf24" opacity=".9"/><circle cx="350" cy="120" r="86" fill="#fbbf24" opacity=".18"/>
+<path d="M0 300 Q120 240 240 285 T480 270 V400 H0Z" fill="#99d9cb"/>
+<path d="M0 335 Q140 285 260 325 T480 315 V400 H0Z" fill="#0f766e"/>
+<path d="M60 400 Q150 330 250 345 T430 400Z" fill="#134e4a" opacity=".25"/>
+<g transform="translate(205 130)">
+<circle cx="32" cy="22" r="22" fill="#8a5a3c"/><path d="M12 18 Q16 -4 38 -2 Q56 2 52 20 Q40 6 12 18Z" fill="#2b1d16"/>
+<path d="M18 52 Q32 44 48 52 L52 120 H14Z" fill="#f97316"/>
+<path d="M14 120 L8 190 H26 L36 130 L46 190 H64 L52 120Z" fill="#134e4a"/>
+<path d="M18 58 L-6 100" stroke="#8a5a3c" stroke-width="11" stroke-linecap="round"/><path d="M48 58 L74 92" stroke="#8a5a3c" stroke-width="11" stroke-linecap="round"/>
+<rect x="64" y="84" width="14" height="18" rx="4" fill="#0f766e"/><rect x="66" y="88" width="10" height="9" rx="2" fill="#ccfbf1"/>
+<path d="M6 190 h24 M52 190 h26" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+</g>
+<g fill="#0f766e"><path d="M60 330 q-30 -70 10 -120 q40 50 -10 120z"/><path d="M60 330 q30 -50 80 -50 q-20 50 -80 50z" fill="#14b8a6"/></g>
+<g fill="#14b8a6"><path d="M420 335 q20 -60 -10 -100 q-34 44 10 100z"/><path d="M420 335 q-30 -36 -70 -30 q16 40 70 30z" fill="#0f766e"/></g>
+<g fill="#fff" opacity=".85"><circle cx="90" cy="90" r="4"/><circle cx="140" cy="60" r="3"/><circle cx="420" cy="60" r="3"/></g>
+</svg>

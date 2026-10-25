@@ -1,0 +1,273 @@
+{
+  "_BarChart-XGmkHWw5.js": {
+    "file": "assets/BarChart-XGmkHWw5.js",
+    "name": "BarChart",
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "resources/js/app.tsx"
+    ]
+  },
+  "_ExerciseBits-DTTts5Bv.js": {
+    "file": "assets/ExerciseBits-DTTts5Bv.js",
+    "name": "ExerciseBits",
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "_ui-lGgZXmT5.js"
+    ]
+  },
+  "_LineChart-Bz7sLszD.js": {
+    "file": "assets/LineChart-Bz7sLszD.js",
+    "name": "LineChart",
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "_BarChart-XGmkHWw5.js"
+    ]
+  },
+  "_jsx-runtime-Wy9s6hX0.js": {
+    "file": "assets/jsx-runtime-Wy9s6hX0.js",
+    "name": "jsx-runtime"
+  },
+  "_pause-9m8OLzBg.js": {
+    "file": "assets/pause-9m8OLzBg.js",
+    "name": "pause",
+    "imports": [
+      "_ui-lGgZXmT5.js"
+    ]
+  },
+  "_play-Bug7hOEv.js": {
+    "file": "assets/play-Bug7hOEv.js",
+    "name": "play",
+    "imports": [
+      "_ui-lGgZXmT5.js"
+    ]
+  },
+  "_plus-6QsGjkk6.js": {
+    "file": "assets/plus-6QsGjkk6.js",
+    "name": "plus",
+    "imports": [
+      "_ui-lGgZXmT5.js"
+    ]
+  },
+  "_ui-lGgZXmT5.js": {
+    "file": "assets/ui-lGgZXmT5.js",
+    "name": "ui",
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js"
+    ]
+  },
+  "_wind-xbzstzQi.js": {
+    "file": "assets/wind-xbzstzQi.js",
+    "name": "wind",
+    "imports": [
+      "_ui-lGgZXmT5.js"
+    ]
+  },
+  "node_modules/leaflet/dist/images/layers-2x.png": {
+    "file": "assets/layers-2x-Bpkbi35X.png",
+    "src": "node_modules/leaflet/dist/images/layers-2x.png"
+  },
+  "node_modules/leaflet/dist/images/layers.png": {
+    "file": "assets/layers-BWBAp2CZ.png",
+    "src": "node_modules/leaflet/dist/images/layers.png"
+  },
+  "node_modules/leaflet/dist/images/marker-icon.png": {
+    "file": "assets/marker-icon-hN30_KVU.png",
+    "src": "node_modules/leaflet/dist/images/marker-icon.png"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-C3ZkLTmi.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.tsx": {
+    "file": "assets/app-CZj79ucb.js",
+    "name": "app",
+    "src": "resources/js/app.tsx",
+    "isEntry": true,
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "_ui-lGgZXmT5.js"
+    ],
+    "dynamicImports": [
+      "resources/js/pages/Trends.tsx",
+      "resources/js/pages/Energy.tsx",
+      "resources/js/pages/EnergyHistory.tsx",
+      "resources/js/pages/MapPage.tsx",
+      "resources/js/pages/TracksHistory.tsx",
+      "resources/js/pages/ExercisesHome.tsx",
+      "resources/js/pages/ExerciseList.tsx",
+      "resources/js/pages/ExerciseDetail.tsx",
+      "resources/js/pages/Programs.tsx",
+      "resources/js/pages/SessionRunner.tsx",
+      "resources/js/pages/ExerciseProgress.tsx"
+    ],
+    "css": [
+      "assets/app-C3ZkLTmi.css"
+    ]
+  },
+  "resources/js/components/MapView.tsx": {
+    "file": "assets/MapView-EFZfbEhp.js",
+    "name": "MapView",
+    "src": "resources/js/components/MapView.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js"
+    ],
+    "css": [
+      "assets/MapView-1DTFk8zz.css"
+    ],
+    "assets": [
+      "assets/layers-BWBAp2CZ.png",
+      "assets/layers-2x-Bpkbi35X.png",
+      "assets/marker-icon-hN30_KVU.png"
+    ]
+  },
+  "resources/js/pages/Energy.tsx": {
+    "file": "assets/Energy-BjzOZQ9v.js",
+    "name": "Energy",
+    "src": "resources/js/pages/Energy.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "_ui-lGgZXmT5.js",
+      "resources/js/app.tsx",
+      "_BarChart-XGmkHWw5.js"
+    ]
+  },
+  "resources/js/pages/EnergyHistory.tsx": {
+    "file": "assets/EnergyHistory-DLzO3-94.js",
+    "name": "EnergyHistory",
+    "src": "resources/js/pages/EnergyHistory.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "_ui-lGgZXmT5.js",
+      "_BarChart-XGmkHWw5.js"
+    ]
+  },
+  "resources/js/pages/ExerciseDetail.tsx": {
+    "file": "assets/ExerciseDetail-CPLRsTW0.js",
+    "name": "ExerciseDetail",
+    "src": "resources/js/pages/ExerciseDetail.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "_ui-lGgZXmT5.js",
+      "_ExerciseBits-DTTts5Bv.js",
+      "_play-Bug7hOEv.js",
+      "_wind-xbzstzQi.js"
+    ]
+  },
+  "resources/js/pages/ExerciseList.tsx": {
+    "file": "assets/ExerciseList-BvcIsXwZ.js",
+    "name": "ExerciseList",
+    "src": "resources/js/pages/ExerciseList.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "_ui-lGgZXmT5.js",
+      "_ExerciseBits-DTTts5Bv.js"
+    ]
+  },
+  "resources/js/pages/ExerciseProgress.tsx": {
+    "file": "assets/ExerciseProgress-CYNmTx6T.js",
+    "name": "ExerciseProgress",
+    "src": "resources/js/pages/ExerciseProgress.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "_ui-lGgZXmT5.js",
+      "resources/js/app.tsx",
+      "_BarChart-XGmkHWw5.js",
+      "_LineChart-Bz7sLszD.js"
+    ]
+  },
+  "resources/js/pages/ExercisesHome.tsx": {
+    "file": "assets/ExercisesHome-BJWwdE8W.js",
+    "name": "ExercisesHome",
+    "src": "resources/js/pages/ExercisesHome.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "_ui-lGgZXmT5.js",
+      "_ExerciseBits-DTTts5Bv.js",
+      "_play-Bug7hOEv.js"
+    ]
+  },
+  "resources/js/pages/MapPage.tsx": {
+    "file": "assets/MapPage-D4IDxGcs.js",
+    "name": "MapPage",
+    "src": "resources/js/pages/MapPage.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "_ui-lGgZXmT5.js",
+      "_pause-9m8OLzBg.js",
+      "_play-Bug7hOEv.js",
+      "resources/js/app.tsx"
+    ],
+    "dynamicImports": [
+      "resources/js/components/MapView.tsx"
+    ]
+  },
+  "resources/js/pages/Programs.tsx": {
+    "file": "assets/Programs-CjZZIoUF.js",
+    "name": "Programs",
+    "src": "resources/js/pages/Programs.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "_ui-lGgZXmT5.js",
+      "_ExerciseBits-DTTts5Bv.js",
+      "_play-Bug7hOEv.js",
+      "_plus-6QsGjkk6.js",
+      "resources/js/app.tsx"
+    ]
+  },
+  "resources/js/pages/SessionRunner.tsx": {
+    "file": "assets/SessionRunner-C7HplXcT.js",
+    "name": "SessionRunner",
+    "src": "resources/js/pages/SessionRunner.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "_ui-lGgZXmT5.js",
+      "_ExerciseBits-DTTts5Bv.js",
+      "_pause-9m8OLzBg.js",
+      "_play-Bug7hOEv.js",
+      "_plus-6QsGjkk6.js",
+      "_wind-xbzstzQi.js",
+      "resources/js/app.tsx"
+    ]
+  },
+  "resources/js/pages/TracksHistory.tsx": {
+    "file": "assets/TracksHistory-DNJvryub.js",
+    "name": "TracksHistory",
+    "src": "resources/js/pages/TracksHistory.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "_ui-lGgZXmT5.js",
+      "resources/js/app.tsx"
+    ],
+    "dynamicImports": [
+      "resources/js/components/MapView.tsx"
+    ]
+  },
+  "resources/js/pages/Trends.tsx": {
+    "file": "assets/Trends-CmTspd6F.js",
+    "name": "Trends",
+    "src": "resources/js/pages/Trends.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_jsx-runtime-Wy9s6hX0.js",
+      "_ui-lGgZXmT5.js",
+      "_BarChart-XGmkHWw5.js",
+      "_LineChart-Bz7sLszD.js"
+    ]
+  }
+}

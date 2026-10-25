@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="t"><title id="t">Montre connectée avec signal Bluetooth</title>
+<rect width="480" height="300" rx="32" fill="#eef2ff"/>
+<rect x="198" y="10" width="84" height="80" rx="14" fill="#334155"/><rect x="198" y="210" width="84" height="80" rx="14" fill="#334155"/>
+<rect x="160" y="70" width="160" height="160" rx="40" fill="#0f172a"/><rect x="172" y="82" width="136" height="136" rx="30" fill="#0f766e"/>
+<rect x="320" y="132" width="8" height="34" rx="4" fill="#475569"/>
+<text x="240" y="160" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="34" font-weight="700">··:··</text>
+<text x="240" y="190" text-anchor="middle" fill="#ccfbf1" font-family="system-ui,sans-serif" font-size="13">facultative</text>
+<g fill="none" stroke="#6366f1" stroke-width="5" stroke-linecap="round"><path d="M372 120 q22 30 0 60"/><path d="M394 100 q38 50 0 100"/><path d="M108 120 q-22 30 0 60"/><path d="M86 100 q-38 50 0 100"/></g>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img" aria-labelledby="t"><title id="t">Jeune pousse : premier pas dans l'application</title>
+<ellipse cx="120" cy="158" rx="80" ry="10" fill="#0f766e" opacity=".12"/>
+<path d="M70 150 h100 l-12 -44 h-76z" fill="#f97316"/><rect x="62" y="96" width="116" height="16" rx="6" fill="#fb923c"/>
+<path d="M120 96 V56" stroke="#0f766e" stroke-width="6" stroke-linecap="round"/>
+<path d="M120 70 q-46 -4 -50 -44 q44 -2 50 44z" fill="#14b8a6"/><path d="M120 60 q44 -2 52 -42 q-48 0 -52 42z" fill="#0f766e"/>
+<circle cx="188" cy="40" r="5" fill="#fbbf24"/><circle cx="52" cy="60" r="4" fill="#fbbf24"/>
+</svg>

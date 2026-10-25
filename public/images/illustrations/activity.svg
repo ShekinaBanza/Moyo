@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="t"><title id="t">Chemin de marche entre des collines</title>
+<rect width="480" height="300" rx="32" fill="#e6f7f1"/>
+<circle cx="90" cy="70" r="30" fill="#fbbf24"/>
+<path d="M0 210 Q100 120 200 190 T400 150 T480 180 V300 H0Z" fill="#8bd3c0"/>
+<path d="M0 250 Q140 180 260 240 T480 220 V300 H0Z" fill="#0f766e"/>
+<path d="M200 300 Q230 250 290 235 T400 200" fill="none" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" stroke-dasharray="2 22"/>
+<g transform="translate(300 110)"><circle cx="18" cy="12" r="12" fill="#8a5a3c"/><path d="M6 28 h24 l4 46 h-30z" fill="#f97316"/><path d="M8 74 l-6 36 h12 l8 -30 l8 30 h12 l-8 -36z" fill="#134e4a"/></g>
+<g fill="#14b8a6"><path d="M60 270 q-14 -34 6 -58 q20 24 -6 58z"/><path d="M430 262 q12 -30 -4 -50 q-18 22 4 50z"/></g>
+</svg>
