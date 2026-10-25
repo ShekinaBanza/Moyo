@@ -112,3 +112,64 @@ Aucune file d'attente (`queue`) n'est requise. Une tâche cron **chaque minute**
 - Création de compte, connexion, saisie d'un repas, déconnexion, reconnexion : la saisie est toujours là.
 - Fichiers privés inaccessibles (voir §2.5). `APP_DEBUG=false` : une erreur ne montre aucune trace.
 - Documentation officielle : https://laravel.com/docs/12.x/deployment — https://www.hostinger.com/support/5792078-how-to-use-composer-at-hostinger/
+
+---
+
+## Mise en ligne pas à pas — https://rosybrown-giraffe-981859.hostingersite.com/
+
+État constaté (25 oct. 2026) : le domaine répond avec la **page par défaut de Hostinger** : rien n'est encore déployé. Le déploiement n'a pas été fait depuis cet environnement (aucun accès à hPanel, SSH ou FTP : ces accès ne doivent pas être partagés en conversation).
+
+Un paquet prêt à envoyer est généré localement : `deploy/moyo-hostinger-upload.zip` (9 Mo, **sans `.env`**, dépendances de production installées pour PHP 8.2+, `public/build` compilé). Il n'est pas versionné (régénérable : `git archive HEAD`, `composer install --no-dev --optimize-autoloader`, zip). Sa mise en route a été vérifiée en local (99 routes, `/up` et `/` répondent 200) — **pas sur Hostinger**.
+
+### A. Dans hPanel (Sites → ce site)
+1. **PHP** : Avancé → Configuration PHP → version **8.2, 8.3 ou 8.4** ; extensions : `mbstring, openssl, pdo_mysql, fileinfo, tokenizer, xml, ctype, curl, zip` (+ `intl` conseillée).
+2. **SSL** : activé et « Forcer HTTPS ».
+3. **Base MySQL** : Bases de données → créer ; noter nom, utilisateur, mot de passe.
+4. **Racine documentaire** : si hPanel permet de la changer, la pointer vers `…/moyo/public` (Option A). Sinon, utiliser la disposition B ci-dessous.
+
+### B. Envoi des fichiers (sans SSH)
+1. Gestionnaire de fichiers → créer le dossier `moyo` **à côté** de `public_html` (au niveau du compte, pas dedans).
+2. Envoyer `moyo-hostinger-upload.zip` dans `moyo/` puis « Extraire ». Vérifier que `moyo/artisan`, `moyo/vendor`, `moyo/public/build` existent.
+3. Disposition B uniquement : copier le **contenu** de `moyo/public/` dans `public_html/`, puis remplacer `public_html/index.php` par `moyo/deploy/hostinger/index.php` (il charge `../moyo`).
+4. Créer `moyo/.env` (modèle ci-dessous) via le Gestionnaire de fichiers.
+
+### C. `.env` de production (à créer sur le serveur, jamais dans Git)
+```
+APP_NAME="Moyo"
+APP_ENV=production
+APP_DEBUG=false
+APP_KEY=                      # voir D.1 : à générer UNE seule fois
+APP_URL=https://rosybrown-giraffe-981859.hostingersite.com
+APP_TIMEZONE=UTC
+APP_LOCALE=fr
+APP_FALLBACK_LOCALE=en
+LOG_LEVEL=warning
+
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=<nom_base_hpanel>
+DB_USERNAME=<utilisateur_hpanel>
+DB_PASSWORD=<mot_de_passe_hpanel>
+
+SESSION_DRIVER=database
+SESSION_SECURE_COOKIE=true
+SESSION_SAME_SITE=lax
+SANCTUM_STATEFUL_DOMAINS=rosybrown-giraffe-981859.hostingersite.com
+CACHE_STORE=database
+QUEUE_CONNECTION=sync
+```
+(SMTP et clés VAPID : voir docs/NOTIFICATIONS.md ; facultatifs.)
+
+### D. Initialisation (terminal SSH de hPanel, ou « Exécuter une commande » si disponible)
+1. `cd ~/moyo && php artisan key:generate --force` — **une seule fois** (si `APP_KEY` est vide). Ne jamais le refaire ensuite.
+2. **Sauvegarde** de la base (phpMyAdmin → Exporter) — la base est neuve : cette étape devient indispensable pour toute mise à jour.
+3. `php artisan migrate --force` puis `php artisan db:seed --force` (catalogues aliments, activités, exercices et modèles ; aucun utilisateur).
+4. `chmod -R u+rwX storage bootstrap/cache` puis `php artisan config:cache && php artisan route:cache`.
+Sans SSH : demander l'exécution de ces commandes au support Hostinger, ou importer le schéma via phpMyAdmin depuis une base locale MySQL migrée (`php artisan migrate --seed` en local sur MySQL, puis export SQL) — dans ce cas, la clé `APP_KEY` doit être générée localement et copiée dans le `.env` serveur.
+
+### E. Tâche cron (facultative, pour les rappels)
+Avancé → Tâches Cron → chaque minute : `php /home/<compte>/moyo/artisan schedule:run`.
+
+### F. Vérifications à faire après la mise en ligne
+`/up` → 200 ; accueil, inscription, connexion ; `/.env`, `/composer.json`, `/storage/logs/laravel.log` → 403/404 ; enregistrer un repas et une activité ; GPS (autorisation du navigateur, HTTPS) ; page « Ma montre » sur Chrome Android ; installation PWA ; deux comptes : isolement ; aucune trace d'erreur affichée (`APP_DEBUG=false`).
