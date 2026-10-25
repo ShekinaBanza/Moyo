@@ -36,7 +36,8 @@ Le seeder ne crée **que** les catalogues (aliments, activités, exercices et 5 
 ## Commandes de test
 
 ```bash
-php artisan test      # backend : 109 tests (isolation multi-comptes, sécurité, sommeil, sync, règles médicales, énergie, GPS, notifications, exercices, montre)
+php artisan moyo:check # (sur le serveur) contrôle de configuration en lecture seule
+php artisan test      # backend : 116 tests (isolation multi-comptes, sécurité, sommeil, sync, règles médicales, énergie, GPS, notifications, exercices, montre)
 npm run typecheck     # TypeScript
 npm test              # frontend : 32 tests (file d'attente hors ligne, formats, GPS, séance minutée, décodeurs Bluetooth, programmes)
 npm run build         # typecheck + build de production
@@ -54,6 +55,7 @@ npm run build         # typecheck + build de production
 ## Documentation
 
 - [docs/DEPLOY_HOSTINGER.md](docs/DEPLOY_HOSTINGER.md) — déploiement
+- [docs/DB_MIGRATION.md](docs/DB_MIGRATION.md) — MySQL en production, migration SQLite → MySQL
 - [docs/BACKUP_RESTORE.md](docs/BACKUP_RESTORE.md) — sauvegarde et restauration
 - [docs/SECURITY.md](docs/SECURITY.md) — rapport de sécurité
 - [docs/SAFETY_RULES.md](docs/SAFETY_RULES.md) — règles de sécurité médicale (v1)

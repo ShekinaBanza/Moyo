@@ -186,15 +186,23 @@ Avancé → Tâches Cron → chaque minute : `php /home/<compte>/moyo/artisan sc
 
 ---
 
-## Dépannage : « le déploiement attend un dossier `dist` » (build réussi mais déploiement en échec)
+## Dépannage : « No output directory found after build » / dossier `dist` introuvable
 
-**Symptôme** : le journal Hostinger montre `tsc --noEmit` réussi, `vite build` terminé (2 562 modules) puis une erreur car `dist` n'existe pas.
+**Ce que montre le journal** : `tsc --noEmit` réussi, `vite build` terminé (2 562 modules, fichiers écrits dans `public/build`), puis l'échec « No output directory found after build ».
 
-**Cause confirmée** : Moyo est une application **Laravel complète** (PHP + Vite). Vite écrit volontairement dans `public/build` (avec `public/build/manifest.json`) car `@vite(...)` dans `resources/views/app.blade.php` lit ce manifeste. Hostinger a détecté `package.json`/Vite et a configuré le dépôt comme un **site frontend statique** (« Node.js / framework JavaScript ») dont le dossier de sortie par défaut est `dist`. Ce n'est pas un défaut du code : le build fonctionne.
+**Cause confirmée** — deux faits :
+1. **Dans le dépôt** : Moyo est une application **Laravel (PHP) servie par Laravel**. Vite écrit volontairement dans `public/build`, avec `public/build/manifest.json`, parce que la vue `resources/views/app.blade.php` appelle `@vite(...)`, qui lit ce manifeste. Rien dans le dépôt ne mentionne `dist`, et aucun fichier de configuration Hostinger n'y figure. Les fichiers compilés sont **déjà versionnés** sur GitHub (`public/build/manifest.json` et `assets/`).
+2. **Chez Hostinger** : l'étape qui s'est exécutée est celle du produit **« Node.js Web App »** (import d'un dépôt GitHub avec détection de framework). Ses paramètres de déploiement sont : *framework preset, branche, version de Node, commande de build, **dossier de sortie**, fichier d'entrée* ; le dossier de sortie est « requis pour les applications frontend statiques » et pré-rempli (souvent `dist`) — voir la documentation Hostinger [Build settings](https://docs.hostinger.com/node.js/build-settings) et [Creating an app](https://docs.hostinger.com/node.js/creating-an-app). Le preset détecté pour Moyo (Vite) cherche donc `dist`, qui n'existe pas. C'est un **mauvais type de déploiement**, pas un défaut du code : une application statique/Node ne peut pas exécuter Laravel (PHP, API, base de données).
 
-**À ne pas faire** : changer `build.outDir` vers `dist` (la vue Laravel ne trouverait plus le manifeste → page blanche), créer un `dist` vide ou y copier des fichiers (le site statique n'aurait ni PHP, ni API, ni base de données).
+**À ne pas faire** : mettre `build.outDir` à `dist` (la vue Laravel ne trouverait plus le manifeste), créer un `dist` vide, copier des fichiers dedans, ou régler le dossier de sortie de l'app Node sur `public/build` (le site serait un fichier statique sans PHP : page blanche, pas d'API).
 
-**Correction (panneau Hostinger, pas le dépôt)** — au choix :
-1. **Recommandé** : déployer comme **site PHP** et non comme application frontend/Node : hPanel → *Sites* → site concerné → *Avancé → Git* (ou *Gestionnaire de fichiers/SSH*), cloner `https://github.com/ShekinaBanza/Moyo.git` branche **`main`**, et suivre la section « Mise en ligne pas à pas ». Le dossier public du site doit être `…/public` (ou la disposition `public_html` décrite dans `deploy/hostinger/README.md`). Aucune étape de build n'est nécessaire sur Hostinger : `public/build` est déjà versionné et `composer install --no-dev` suffit.
-2. Si le site a été créé comme « application web Node.js/frontend » : le supprimer ou créer un nouveau site PHP/Laravel, puis relier le même dépôt.
-3. Si l'option frontend doit absolument être gardée : désactiver la commande de build et définir le dossier de sortie sur `public` (qui contient `build/`, `index.php` ne sera pas exécuté en statique : l'application ne fonctionnera pas). Ce cas n'est donc **pas** recommandé.
+**Réglage précis à effectuer dans hPanel** (les libellés exacts peuvent varier ; je n'ai pas accès à votre hPanel) :
+1. Supprimer (ou ignorer) l'application « Node.js Web App » créée à partir du dépôt.
+2. Créer le site comme un **site web PHP** de l'hébergement mutualisé : *Sites → Ajouter un site → site PHP vide* (pas un modèle WordPress ni Node.js) pour le domaine `rosybrown-giraffe-981859.hostingersite.com`.
+3. Activer **PHP 8.2–8.4** (Avancé → Configuration PHP) et **SSH** (Avancé → Accès SSH).
+4. Récupérer le code : en SSH, `git clone https://github.com/ShekinaBanza/Moyo.git ~/moyo` (branche `main`) — ou *Avancé → Git* si disponible — puis suivre la section « Mise en ligne pas à pas » ci-dessus. **Aucune commande de build n'est nécessaire** : `public/build` est déjà dans le dépôt. Un guide communautaire du même schéma (site PHP vide + SSH + clone) : [dev.to/vimuth7](https://dev.to/vimuth7/deploy-a-laravel-app-on-hostinger-using-git-1ice) (tiers : à vérifier, notamment l'emplacement du dossier `public_html`).
+5. **Racine web = `public/` de Laravel** : si hPanel permet de changer la racine du domaine, la pointer vers `…/moyo/public`. Sinon, disposition `public_html` + `index.php` de `deploy/hostinger/` (le projet reste hors de `public_html`).
+6. Créer le `.env` **sur le serveur** (section C), puis `composer2 install --no-dev --optimize-autoloader`, `php artisan migrate --force`, `php artisan db:seed --force`.
+7. Contrôler : `php artisan moyo:check` (lecture seule) doit afficher 0 échec ; `https://…/up` → 200 ; `https://…/.env` → 403/404.
+
+**Votre `.env` actuel (SQLite)** : il appartient à votre machine locale. Ne le téléversez pas tel quel : sur le serveur, créez un `.env` à partir de `.env.example` (MySQL). Pour conserver des données SQLite réelles, suivre [DB_MIGRATION.md](DB_MIGRATION.md) (sauvegarde, simulation, copie vérifiée, rien n'est supprimé).
