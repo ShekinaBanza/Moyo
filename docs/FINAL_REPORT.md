@@ -70,3 +70,27 @@ Ajouté au projet existant (aucun module supprimé ; l'ancienne API `reminders` 
 Résultats : `php artisan test` **79 réussis (481 assertions)** ; `npm test` **12 réussis** ; `npm run build` réussi.
 Défauts trouvés pendant les essais et corrigés : décalage d'une heure des dates reçues avec fuseau (un trajet était clos « périmé » à tort) ; pictogrammes SVG invalides (attribut `fill` en double) ; cache du service worker qui servait d'anciennes images (désormais « stale-while-revalidate »).
 Ce qui reste à vérifier par vous : vrai GPS sur téléphone, Web Push avec vos clés VAPID, cron Hostinger, valeurs MET et kcal avec une source de référence.
+
+---
+
+# Module : exercices physiques, montre facultative, publication
+
+| Fonctionnalité | État réel | Fichiers principaux | Tests | Résultat | Limites |
+|---|---|---|---|---|---|
+| Catalogue d'exercices (musculation, abdominaux, mobilité, général), 29 fiches complètes | Terminé et testé | `ExerciseSeeder`, `ExerciseDetail.tsx`, `ExerciseList.tsx` | 3 feature (contenu complet, groupes demandés, matériel) | Réussi | Texte à faire relire par un professionnel du sport/kiné |
+| Illustrations départ/arrivée, couvertures, bannière, pictogrammes d'activités | Terminé et testé | `scripts/figures.mjs`, `scripts/make-figures.mjs`, `public/images/exercises/**` | Test : toutes les images existent sur disque ; 0 image cassée sur 12 pages à 360 px | Réussi | Illustrations **stylisées originales**, pas des planches anatomiques ; aucune image iStock (licence payante) |
+| Programmes (créer, modifier, dupliquer, 5 modèles) | Terminé et testé | `WorkoutProgramController`, `Programs.tsx`, `lib/exercises.ts` | 4 feature + 3 vitest (suggestion, matériel, durée) | Réussi | — |
+| Séance minutée (pause, reprise, repos, précédent/suivant, arrêt) | Terminé et testé | `lib/workoutRunner.ts`, `SessionRunner.tsx` | 7 vitest (machine à états) + essai navigateur avec vrais chronos (26 s) | Réussi | Pas testé sur téléphone ; écran allumé via Wake Lock si disponible |
+| Historique et progression (graphiques réels) | Terminé, vérifié | `ExerciseProgress.tsx`, `WorkoutSessionController` | Feature + navigateur (séance enregistrée, activité au bilan) | Réussi | — |
+| Intégration bilan énergétique + anti double comptage | Terminé et testé | `WorkoutService`, `log-activity` | 4 feature (ajout, doublon manuel remplaçable, GPS/montre jamais remplacés, une seule fois) | Réussi | MET de catégorie indicatifs (voir ENERGY.md) |
+| Sécurité médicale des exercices (open/restricted/blocked) | Terminé et testé | `WorkoutService::access`, `ExerciseBits.tsx` | 4 feature (restriction, urgence, réouverture après évaluation) | Réussi | Seuils non validés cliniquement |
+| Isolation des programmes et séances | Terminé et testé | `WorkoutProgramController`, `OwnedPolicy` | 2 feature (404 inter-comptes, programme d'autrui non attachable) | Réussi | — |
+| **Ma montre** : page, états, connexion/déconnexion/reconnexion, dépannage | Terminé ; **testé avec un appareil Bluetooth simulé** | `Watch.tsx`, `useWatch.ts`, `lib/watch.ts` | 10 vitest (décodeurs SIG, erreurs) + 11 feature (sans montre, doublons, sources, capacités, indépendance) + essai navigateur simulé (connexion, 6 mesures, perte, reconnexion, déconnexion volontaire) | Réussi | **Aucun test sur la vraie Watch8** ; on ignore si elle expose le profil standard de fréquence cardiaque |
+| Données réellement récupérées de la montre | **Non vérifié sur matériel** | — | — | — | Seule la fréquence cardiaque standard peut être lue ; pas, sommeil, SpO₂, HRV, calories : non pris en charge |
+| Fonctionnement sans montre | Terminé et testé | toutes les pages | Test feature : 18 routes principales répondent sans appareil | Réussi | — |
+| Dépendances compatibles PHP 8.2 | Terminé | `composer.json` (`platform.php`), `composer.lock` | 109 tests rejoués après re-résolution ; `composer audit` / `npm audit` : 0 alerte | Réussi | Testé en PHP 8.5 local seulement |
+| Publication GitHub | **Terminé** | dépôt `ShekinaBanza/Moyo`, branche `main` | `git ls-remote` : le commit distant = commit local ; page GitHub : fichiers présents, pas de `.env` | Réussi | Le dépôt est **public** |
+| Déploiement Hostinger | **Non effectué** (aucun accès) | `docs/DEPLOY_HOSTINGER.md`, `deploy/hostinger/`, `deploy/moyo-hostinger-upload.zip` | Paquet de production démarré en local (99 routes, `/up` et `/` = 200) | Paquet prêt | Site actuel = page par défaut Hostinger ; étapes manuelles à exécuter |
+
+Totaux : **109 tests backend (1 293 assertions), 32 tests frontend, build réussi**.
+Défauts trouvés pendant ces essais et corrigés : relation de profil mise en cache faussant la règle de sécurité (relecture fraîche), déconnexion volontaire de la montre signalée « connexion perdue », `composer.lock` exigeant PHP 8.4.1+ (re-résolu pour PHP 8.2), couvertures de catégories trop zoomées.
