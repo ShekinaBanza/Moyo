@@ -39,6 +39,7 @@ class CopyFromSqlite extends Command
 
             return self::FAILURE;
         }
+        DB::purge('legacy_sqlite'); // never reuse a cached connection to another file
         config(['database.connections.legacy_sqlite' => ['driver' => 'sqlite', 'database' => realpath($path), 'prefix' => '', 'foreign_key_constraints' => false]]);
         $src = DB::connection('legacy_sqlite');
         $dst = DB::connection();

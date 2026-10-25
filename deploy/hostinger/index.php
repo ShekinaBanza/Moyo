@@ -20,4 +20,7 @@ require $app.'/vendor/autoload.php';
 /** @var \Illuminate\Foundation\Application $application */
 $application = require_once $app.'/bootstrap/app.php';
 
+// public files (Vite manifest, build/) live in public_html, not in the project folder
+$application->usePublicPath(__DIR__);
+
 $application->handleRequest(Request::capture());

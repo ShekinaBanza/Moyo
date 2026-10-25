@@ -26,3 +26,4 @@ yarn-error.log
 /public/_*
 /deploy/*.zip
 /storage/logs/*.log
+/deploy/local/

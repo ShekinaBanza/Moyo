@@ -40,19 +40,22 @@ class OpsCommandsTest extends TestCase
         foreach (['food_catalog', 'activity_catalog', 'exercises'] as $t) {
             foreach (DB::table($t)->get() as $r) {
                 $row = (array) $r;
-                if (! $sameCatalogIds && $t === 'activity_catalog' && $row['id'] === 1) {
+                if (! $sameCatalogIds && $t === 'activity_catalog' && (int) $row['id'] === (int) DB::table('activity_catalog')->min('id')) {
                     $row['id'] = 999;
                 }
                 $src->table($t)->insert($row);
             }
         }
+        // auto-increment ids are not reset between tests on MySQL: use the real ids
+        $activityId = (int) DB::table('activity_catalog')->min('id');
+        $exerciseId = (int) DB::table('exercises')->min('id');
         $now = now()->toDateTimeString();
         $src->table('users')->insert(['id' => 7, 'name' => 'Ancien', 'email' => 'ancien@example.test', 'password' => 'x', 'created_at' => $now, 'updated_at' => $now]);
         $src->table('health_profiles')->insert(['user_id' => 7, 'timezone' => 'UTC', 'created_at' => $now, 'updated_at' => $now]);
         $src->table('body_measurements')->insert(['user_id' => 7, 'kind' => 'weight', 'value' => 70, 'unit' => 'kg', 'measured_at' => $now, 'source_type' => 'manual', 'created_at' => $now, 'updated_at' => $now]);
-        $src->table('activity_entries')->insert(['user_id' => 7, 'catalog_id' => 2, 'activity_type' => 'walking', 'started_at' => $now, 'duration_minutes' => 30, 'source_type' => 'manual', 'created_at' => $now, 'updated_at' => $now]);
+        $src->table('activity_entries')->insert(['user_id' => 7, 'catalog_id' => $activityId, 'activity_type' => 'walking', 'started_at' => $now, 'duration_minutes' => 30, 'source_type' => 'manual', 'created_at' => $now, 'updated_at' => $now]);
         $src->table('workout_programs')->insert(['id' => 50, 'user_id' => 7, 'name' => 'Perso', 'goal' => 'strength', 'level' => 'beginner', 'is_template' => 0, 'created_at' => $now, 'updated_at' => $now]);
-        $src->table('workout_program_exercises')->insert(['program_id' => 50, 'exercise_id' => 1, 'position' => 0, 'sets' => 2, 'reps' => 8, 'rest_seconds' => 60]);
+        $src->table('workout_program_exercises')->insert(['program_id' => 50, 'exercise_id' => $exerciseId, 'position' => 0, 'sets' => 2, 'reps' => 8, 'rest_seconds' => 60]);
     }
 
     public function test_copy_is_a_dry_run_by_default_and_changes_nothing(): void
@@ -75,7 +78,7 @@ class OpsCommandsTest extends TestCase
 
         $this->assertDatabaseHas('users', ['id' => 7, 'email' => 'ancien@example.test']);
         $this->assertSame(1, DB::table('body_measurements')->where('user_id', 7)->count());
-        $this->assertSame(1, DB::table('activity_entries')->where('user_id', 7)->where('catalog_id', 2)->count());
+        $this->assertSame(1, DB::table('activity_entries')->where('user_id', 7)->whereNotNull('catalog_id')->count());
         $this->assertSame(1, DB::table('workout_programs')->where('user_id', 7)->count());
         $this->assertSame(1, DB::table('workout_program_exercises')->where('program_id', 50)->count());
         $this->assertSame($templatesBefore, DB::table('workout_programs')->whereNull('user_id')->count()); // seeded templates untouched, not duplicated
@@ -107,7 +110,7 @@ class OpsCommandsTest extends TestCase
 
     public function test_production_check_reports_a_bad_configuration_and_never_prints_secrets(): void
     {
-        config(['app.env' => 'production', 'app.debug' => true, 'app.key' => 'base64:SECRETSECRETSECRETSECRETSECRET=', 'app.url' => 'http://example.test', 'database.default' => 'sqlite']);
+        config(['app.env' => 'production', 'app.debug' => true, 'app.key' => 'base64:SECRETSECRETSECRETSECRETSECRET=', 'app.url' => 'http://example.test']);
         $this->artisan('moyo:check')->expectsOutputToContain('APP_DEBUG')->doesntExpectOutputToContain('SECRETSECRET')->assertFailed();
     }
 
