@@ -173,3 +173,18 @@ Avancé → Tâches Cron → chaque minute : `php /home/<compte>/moyo/artisan sc
 
 ### F. Vérifications à faire après la mise en ligne
 `/up` → 200 ; accueil, inscription, connexion ; `/.env`, `/composer.json`, `/storage/logs/laravel.log` → 403/404 ; enregistrer un repas et une activité ; GPS (autorisation du navigateur, HTTPS) ; page « Ma montre » sur Chrome Android ; installation PWA ; deux comptes : isolement ; aucune trace d'erreur affichée (`APP_DEBUG=false`).
+
+---
+
+## Dépannage : « le déploiement attend un dossier `dist` » (build réussi mais déploiement en échec)
+
+**Symptôme** : le journal Hostinger montre `tsc --noEmit` réussi, `vite build` terminé (2 562 modules) puis une erreur car `dist` n'existe pas.
+
+**Cause confirmée** : Moyo est une application **Laravel complète** (PHP + Vite). Vite écrit volontairement dans `public/build` (avec `public/build/manifest.json`) car `@vite(...)` dans `resources/views/app.blade.php` lit ce manifeste. Hostinger a détecté `package.json`/Vite et a configuré le dépôt comme un **site frontend statique** (« Node.js / framework JavaScript ») dont le dossier de sortie par défaut est `dist`. Ce n'est pas un défaut du code : le build fonctionne.
+
+**À ne pas faire** : changer `build.outDir` vers `dist` (la vue Laravel ne trouverait plus le manifeste → page blanche), créer un `dist` vide ou y copier des fichiers (le site statique n'aurait ni PHP, ni API, ni base de données).
+
+**Correction (panneau Hostinger, pas le dépôt)** — au choix :
+1. **Recommandé** : déployer comme **site PHP** et non comme application frontend/Node : hPanel → *Sites* → site concerné → *Avancé → Git* (ou *Gestionnaire de fichiers/SSH*), cloner `https://github.com/ShekinaBanza/Moyo.git` branche **`main`**, et suivre la section « Mise en ligne pas à pas ». Le dossier public du site doit être `…/public` (ou la disposition `public_html` décrite dans `deploy/hostinger/README.md`). Aucune étape de build n'est nécessaire sur Hostinger : `public/build` est déjà versionné et `composer install --no-dev` suffit.
+2. Si le site a été créé comme « application web Node.js/frontend » : le supprimer ou créer un nouveau site PHP/Laravel, puis relier le même dépôt.
+3. Si l'option frontend doit absolument être gardée : désactiver la commande de build et définir le dossier de sortie sur `public` (qui contient `build/`, `index.php` ne sera pas exécuté en statique : l'application ne fonctionnera pas). Ce cas n'est donc **pas** recommandé.
