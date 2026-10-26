@@ -23,11 +23,69 @@
     --color-ok: #15803d;
     --color-warn: #b45309;
     --color-danger: #b91c1c;
-    --shadow-soft: 0 1px 2px rgb(15 118 110 / 0.06), 0 8px 24px rgb(15 118 110 / 0.08);
+    --shadow-soft: 0 1px 2px rgb(15 118 110 / 0.06), 0 4px 12px rgb(15 118 110 / 0.07), 0 12px 32px rgb(15 118 110 / 0.1);
+    --shadow-glass: 0 1px 0 rgb(255 255 255 / 0.6) inset, 0 8px 32px rgb(15 118 110 / 0.14);
 }
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
     color-scheme: light;
+    --surface: #ffffff;
+    --glass: rgb(255 255 255 / 0.62);
+    --glass-border: rgb(255 255 255 / 0.7);
+    --page-glow-a: rgb(45 212 191 / 0.22);
+    --page-glow-b: rgb(249 115 22 / 0.1);
+}
+
+/* Dark theme: the app only uses design tokens (ink, sand, muted, brand-*), so overriding them re-themes everything. */
+.dark {
+    color-scheme: dark;
+    --color-ink: #e6edf3;
+    --color-muted: #9fb0bf;
+    --color-sand: #0a1211;
+    --color-sand-2: #22332f;
+    --color-brand-50: #12302c;
+    --color-brand-100: #164039;
+    --color-brand-200: #1f5a50;
+    --color-ok: #4ade80;
+    --color-warn: #fbbf24;
+    --color-danger: #f87171;
+    --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 28px rgb(0 0 0 / 0.45);
+    --shadow-glass: 0 1px 0 rgb(255 255 255 / 0.06) inset, 0 10px 36px rgb(0 0 0 / 0.5);
+    --surface: #111b1a;
+    --glass: rgb(20 32 31 / 0.6);
+    --glass-border: rgb(255 255 255 / 0.09);
+    --page-glow-a: rgb(20 184 166 / 0.16);
+    --page-glow-b: rgb(249 115 22 / 0.07);
+}
+
+.dark .bg-white,
+.dark .bg-white\/95 {
+    background-color: var(--surface);
+}
+.dark .bg-slate-100 { background-color: #1c2a28; color: #cbd5e1; }
+.dark .bg-green-100 { background-color: #14352a; color: #86efac; }
+.dark .bg-amber-100 { background-color: #3b2f10; color: #fcd34d; }
+.dark .bg-red-100 { background-color: #3d1a1a; color: #fca5a5; }
+.dark .bg-sky-100 { background-color: #112c3b; color: #7dd3fc; }
+.dark .text-brand-100 { color: #ccfbef; }
+.dark .text-amber-900 { color: #fcd34d; }
+.dark .text-slate-700, .dark .text-slate-500, .dark .text-slate-400 { color: var(--color-muted); }
+.dark .text-brand-600, .dark .text-brand-700, .dark .text-brand-800, .dark .text-brand-900 { color: var(--color-brand-300); }
+.dark .headline-accent { background: linear-gradient(90deg, var(--color-brand-300), var(--color-brand-400)); -webkit-background-clip: text; background-clip: text; }
+.dark input, .dark select, .dark textarea { color: var(--color-ink); }
+
+/* Frosted-glass surfaces */
+.glass {
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass { background: var(--surface); }
 }
 
 html {
@@ -36,7 +94,11 @@ html {
 
 body {
     margin: 0;
-    background: var(--color-sand);
+    background:
+        radial-gradient(60rem 36rem at 90% -10%, var(--page-glow-a), transparent 60%),
+        radial-gradient(48rem 30rem at -10% 40%, var(--page-glow-b), transparent 60%),
+        var(--color-sand);
+    background-attachment: fixed;
     color: var(--color-ink);
     font-family: var(--font-sans);
     overflow-x: hidden;

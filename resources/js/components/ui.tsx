@@ -125,7 +125,7 @@ export function Rating({ label, value, onChange, max = 5, lowText, highText }: {
 /* ---------- Surfaces ---------- */
 export function Card({ children, className, as: Tag = 'section', ...rest }: { children: ReactNode; className?: string; as?: 'section' | 'div' | 'article' } & React.HTMLAttributes<HTMLElement>) {
     return (
-        <Tag {...rest} className={cx('rounded-3xl bg-white p-5 shadow-soft', className)}>
+        <Tag {...rest} className={cx('glass rounded-3xl p-5', className)}>
             {children}
         </Tag>
     );

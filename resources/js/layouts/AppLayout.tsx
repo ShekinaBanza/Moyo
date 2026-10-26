@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import { NavLink, Outlet, Link } from 'react-router-dom';
-import { Activity, Apple, BarChart3, Bed, Bell, CalendarDays, Download, Dumbbell, Flame, HeartPulse, LayoutDashboard, MapPinned, MoreHorizontal, Ruler, UserRound, Watch, WifiOff, X } from 'lucide-react';
+import { Activity, Apple, BarChart3, Bed, Bell, CalendarDays, Download, Dumbbell, Flame, HeartPulse, LayoutDashboard, MapPinned, MoreHorizontal, Monitor, Moon, Ruler, Sun, UserRound, Watch, WifiOff, X } from 'lucide-react';
 import { useUnread } from '@/hooks/useUnread';
+import { useTheme } from '@/hooks/useTheme';
 import { listOutbox, onOutboxChange } from '@/lib/offline';
 import { cx } from '@/components/ui';
 
 const MAIN = [
     { to: '/app', label: 'Accueil', icon: LayoutDashboard, end: true },
-    { to: '/app/day', label: 'Ma journée', icon: CalendarDays },
+    { to: '/app/day', label: 'Ma journée', short: 'Journée', icon: CalendarDays },
     { to: '/app/food', label: 'Repas', icon: Apple },
     { to: '/app/activity', label: 'Activité', icon: Activity },
-    { to: '/app/symptoms', label: 'Symptômes', icon: HeartPulse },
+    { to: '/app/symptoms', label: 'Symptômes', short: 'Symptôme', icon: HeartPulse },
 ];
 const MORE = [
     { to: '/app/exercises', label: 'Exercices physiques', icon: Dumbbell },
@@ -56,6 +57,9 @@ function usePendingCount() {
 export default function AppLayout() {
     const online = useOnline();
     const unread = useUnread();
+    const theme = useTheme();
+    const ThemeIcon = theme.choice === 'dark' ? Moon : theme.choice === 'light' ? Sun : Monitor;
+    const themeLabel = theme.choice === 'dark' ? 'sombre' : theme.choice === 'light' ? 'clair' : 'automatique';
     const pending = usePendingCount();
     const [moreOpen, setMoreOpen] = useState(false);
     const [installEvt, setInstallEvt] = useState<InstallEvent | null>(null);
@@ -70,7 +74,7 @@ export default function AppLayout() {
     }, []);
 
     const link = ({ isActive }: { isActive: boolean }) =>
-        cx('flex min-h-11 items-center gap-3 rounded-2xl px-3 py-2 text-sm font-medium', isActive ? 'bg-brand-600 text-white' : 'text-ink hover:bg-brand-50');
+        cx('flex min-h-11 items-center gap-3 rounded-2xl px-3 py-2 text-sm font-medium transition-colors', isActive ? 'bg-brand-600 text-white shadow-soft' : 'text-ink hover:bg-brand-50');
 
     return (
         <div className="min-h-screen lg:flex">
@@ -79,7 +83,7 @@ export default function AppLayout() {
             </a>
 
             {/* Desktop sidebar */}
-            <aside className="hidden w-64 shrink-0 flex-col gap-1 border-r border-sand-2 bg-white p-4 lg:flex" aria-label="Navigation principale">
+            <aside className="hidden w-64 shrink-0 flex-col gap-1 glass p-4 lg:flex" aria-label="Navigation principale">
                 <Link to="/app" className="mb-4 flex items-center gap-2 px-2 text-xl font-extrabold text-brand-700">
                     <img src="/icons/icon.svg" alt="" width={32} height={32} className="h-8 w-8" /> Moyo
                 </Link>
@@ -104,33 +108,44 @@ export default function AppLayout() {
                     </div>
                 )}
 
-                <div className="sticky top-0 z-30 flex items-center justify-between border-b border-sand-2 bg-sand/95 px-4 py-2 backdrop-blur lg:justify-end">
+                <div className="sticky top-0 z-30 flex items-center justify-between glass px-4 py-2 lg:justify-end lg:gap-1">
                     <Link to="/app" className="flex items-center gap-2 font-extrabold text-brand-700 lg:hidden"><img src="/icons/icon.svg" alt="" width={28} height={28} className="h-7 w-7" /> Moyo</Link>
-                    <Link to="/app/notifications" aria-label={unread > 0 ? `Notifications : ${unread} non lue(s)` : 'Notifications'} className="relative grid h-11 w-11 place-items-center rounded-full hover:bg-white">
+                    <button type="button" onClick={theme.cycle} aria-label={`Thème : ${themeLabel}. Changer`} title={`Thème : ${themeLabel}`} className="ml-auto grid h-11 w-11 place-items-center rounded-full hover:bg-brand-50 lg:ml-0">
+                        <ThemeIcon className="h-5 w-5" aria-hidden />
+                    </button>
+                    <Link to="/app/notifications" aria-label={unread > 0 ? `Notifications : ${unread} non lue(s)` : 'Notifications'} className="relative grid h-11 w-11 place-items-center rounded-full hover:bg-brand-50">
                         <Bell className="h-5 w-5" aria-hidden />
                         {unread > 0 && <span className="absolute right-1 top-1 grid min-h-5 min-w-5 place-items-center rounded-full bg-accent px-1 text-[11px] font-bold text-white">{unread > 9 ? '9+' : unread}</span>}
                     </Link>
                 </div>
 
-                <main id="main" className="mx-auto w-full max-w-5xl px-4 pb-28 pt-5 lg:px-8 lg:pb-10">
+                <main id="main" className="mx-auto w-full max-w-5xl px-4 pb-32 pt-5 lg:px-8 lg:pb-10">
                     <Outlet />
                 </main>
             </div>
 
             {/* Mobile bottom navigation: thumb-friendly, secondary items behind "Plus" */}
-            <nav aria-label="Navigation mobile" className="safe-bottom fixed inset-x-0 bottom-0 z-40 border-t border-sand-2 bg-white lg:hidden">
-                <ul className="mx-auto grid max-w-lg grid-cols-6">
+            <nav aria-label="Navigation mobile" className="safe-bottom glass fixed inset-x-2 bottom-2 z-40 rounded-3xl lg:hidden">
+                <ul className="mx-auto grid max-w-lg grid-cols-6 px-1">
                     {MAIN.map(({ to, label, icon: Icon, ...r }) => (
                         <li key={to}>
-                            <NavLink to={to} end={'end' in r} className={({ isActive }) => cx('flex min-h-14 flex-col items-center justify-center gap-0.5 text-[11px] font-medium', isActive ? 'text-brand-700' : 'text-muted')}>
-                                <Icon className="h-5 w-5" aria-hidden />
-                                {label}
+                            <NavLink to={to} end={'end' in r} className={({ isActive }) => cx('group flex min-h-[4.25rem] flex-col items-center justify-center gap-0.5 text-xs font-medium', isActive ? 'text-brand-700' : 'text-muted')}>
+                                {({ isActive }) => (
+                                    <>
+                                        <span className={cx('grid h-10 w-12 place-items-center rounded-2xl transition-all', isActive ? 'bg-brand-100 shadow-soft' : 'group-active:bg-brand-50')}>
+                                            <Icon className="h-7 w-7" strokeWidth={isActive ? 2.4 : 2} aria-hidden />
+                                        </span>
+                                        <span className="max-w-full px-0.5 text-[11px] leading-tight">{'short' in r ? r.short : label}</span>
+                                    </>
+                                )}
                             </NavLink>
                         </li>
                     ))}
                     <li>
-                        <button aria-expanded={moreOpen} onClick={() => setMoreOpen(true)} className="flex min-h-14 w-full flex-col items-center justify-center gap-0.5 text-[11px] font-medium text-muted">
-                            <MoreHorizontal className="h-5 w-5" aria-hidden />
+                        <button aria-expanded={moreOpen} onClick={() => setMoreOpen(true)} className="group flex min-h-[4.25rem] w-full flex-col items-center justify-center gap-0.5 text-xs font-medium text-muted">
+                            <span className="grid h-10 w-12 place-items-center rounded-2xl group-active:bg-brand-50">
+                                <MoreHorizontal className="h-7 w-7" aria-hidden />
+                            </span>
                             Plus
                         </button>
                     </li>
@@ -138,8 +153,8 @@ export default function AppLayout() {
             </nav>
 
             {moreOpen && (
-                <div className="fixed inset-0 z-50 flex items-end bg-black/40 lg:hidden" onClick={() => setMoreOpen(false)}>
-                    <div role="dialog" aria-modal="true" aria-label="Plus de sections" className="safe-bottom w-full rounded-t-3xl bg-white p-4" onClick={(e) => e.stopPropagation()}>
+                <div className="fixed inset-0 z-50 flex items-end bg-black/40 backdrop-blur-sm lg:hidden" onClick={() => setMoreOpen(false)}>
+                    <div role="dialog" aria-modal="true" aria-label="Plus de sections" className="safe-bottom glass w-full rounded-t-3xl p-4" onClick={(e) => e.stopPropagation()}>
                         <div className="mb-2 flex items-center justify-between">
                             <h2 className="font-bold">Plus</h2>
                             <button aria-label="Fermer" onClick={() => setMoreOpen(false)} className="grid h-11 w-11 place-items-center rounded-full hover:bg-slate-100">
